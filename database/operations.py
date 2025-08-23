@@ -31,3 +31,8 @@ class DatabaseOperations:
         """Get all parsed resumes"""
         result = self.client.table('parsed_resumes').select('*').execute()
         return [ParsedResume(**row) for row in result.data]
+
+    def get_all_candidates(self) -> List[Candidate]:
+        """Fetch all candidates from database"""
+        result = self.client.table('candidates').select('*').execute()
+        return [Candidate(**row) for row in result.data]

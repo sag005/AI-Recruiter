@@ -1,48 +1,43 @@
 # tools/candidate_search_tool.py
-from crewai_tools import BaseTool
+from crewai.tools import tool
 from database.operations import DatabaseOperations
+from typing import List
 from database.models import Candidate
-from .resume_parser_tool import ResumeParserTool
-import random
 
 
-class CandidateSearchTool(BaseTool):
-    name: str = "candidate_search"
-    description: str = "Search for candidates in database and parse their resumes"
-
-    def __init__(self):
-        super().__init__()
-        self.db = DatabaseOperations()
-        self.resume_parser = ResumeParserTool()
-
-    def _run(self, max_candidates: int = 10) -> str:
-        # For POC: Generate hardcoded candidates
-        hardcoded_candidates = self._generate_sample_candidates(max_candidates)
-
-        candidate_ids = []
-        for candidate_data in hardcoded_candidates:
-            candidate = Candidate(**candidate_data)
-            candidate_id = self.db.create_candidate(candidate)
-            candidate_ids.append(candidate_id)
-
-            # Trigger resume parsing
-            self.resume_parser._run(candidate_id, candidate_data['resume_file'])
-
-        return f"Successfully sourced {len(candidate_ids)} candidates"
-
-    def _generate_sample_candidates(self, count: int) -> list:
-        # Hardcoded sample data for POC
-        sample_data = [
-            {
-                'name': f'Candidate_{i}',
-                'yoe': random.randint(1, 15),
-                'current_title': random.choice(['Software Engineer', 'Senior Developer', 'Tech Lead']),
-                'industry': 'Technology',
-                'email': f'candidate{i}@example.com',
-                'phone': f'555-000{i:04d}',
-                'status': 'new',
-                'resume_file': f'resume_{i}.pdf'
-            }
-            for i in range(1, count + 1)
-        ]
-        return sample_data
+@tool("candidate_search")
+def candidate_search_tool(max_candidates: int = 50) -> str:
+    """
+    Fetch all candidates from the database.
+    
+    Args:
+        max_candidates: Maximum number of candidates to return
+        
+    Returns:
+        String summary of all candidates found
+    """
+    db = DatabaseOperations()
+    
+    try:
+        # Fetch all candidates from database
+        candidates = db.get_all_candidates()
+        
+        if not candidates:
+            return "No candidates found in database"
+        
+        # Limit results
+        limited_candidates = candidates[:max_candidates]
+        
+        # Format response
+        candidate_summary = []
+        for candidate in limited_candidates:
+            summary = f"ID: {candidate.id}, Name: {candidate.name}, Status: {candidate.status}, Title: {candidate.current_title}, YOE: {candidate.yoe}"
+            candidate_summary.append(summary)
+        
+        result = f"Found {len(limited_candidates)} total candidates:\n"
+        result += "\n".join(candidate_summary)
+        
+        return result
+        
+    except Exception as e:
+        return f"Error fetching candidates: {str(e)}"
