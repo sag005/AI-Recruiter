@@ -1,0 +1,77 @@
+{
+    "personal_info": {
+        "name": "Robert Smith",
+        "email": "robert.smith@example.com",
+        "phone": "(555) 987-6543",
+        "location": "City, State",
+        "linkedin": null
+    },
+    "professional_summary": "A results driven Controls Engineer and Project Manager with over 20 years of experience in manufacturing. Skilled in Industrial Automation and Process Engineering with a strong mechanical design background. Proven ability to lead and motivate high performance teams.",
+    "work_experience": [
+        {
+            "job_title": "Engineering Services Manager",
+            "company": "Company Name",
+            "duration": "2013-2015",
+            "location": "City, State",
+            "description": "Managed engineering services and manufacturing processes",
+            "responsibilities": [
+                "Accountable for maintaining efficiency and effectiveness of production manufacturing processes",
+                "Manage all engineering services with provision of all energy sources",
+                "Support waste water operations by providing advanced troubleshooting on Siemens PLC's",
+                "Developed asset management software to track cost, asset history and work order tracking",
+                "Performed advanced troubleshooting and PLC support for all plant equipment"
+            ]
+        },
+        {
+            "job_title": "Electrical Superintendent",
+            "company": "Company Name",
+            "duration": "2008-2013",
+            "location": "City, State",
+            "description": "Supervised and coordinated electrical and instrumentation activities",
+            "responsibilities": [
+                "Managed projects for installation of new equipment",
+                "Managed large network of Allen-Bradley PLC's",
+                "Managed installation and startup of several new projects over $1MM",
+                "Trained electricians and instrument technicians",
+                "Performed advanced troubleshooting and PLC support"
+            ]
+        },
+        {
+            "job_title": "Project Manager",
+            "company": "Company Name",
+            "duration": "2005-2008",
+            "location": "City, State",
+            "description": "Responsible for design review and interpretation",
+            "responsibilities": [
+                "Review and interpret proposed designs, drawings, and specifications"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Process Engineering",
+        "Industrial Automation",
+        "Project Management",
+        "PLC Programming",
+        "SCADA Systems",
+        "Team Leadership",
+        "Asset Management",
+        "Mechanical Design",
+        "Troubleshooting"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 20,
+    "seniority_level": "Senior",
+    "keywords": [
+        "Controls Engineer",
+        "Industrial Automation",
+        "PLC",
+        "SCADA",
+        "Manufacturing",
+        "Process Engineering",
+        "Project Management"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/10712803.pdf"
+}

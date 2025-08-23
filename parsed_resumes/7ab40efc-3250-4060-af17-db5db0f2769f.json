@@ -1,0 +1,87 @@
+{
+    "personal_info": {
+        "name": "Michael Smith",
+        "email": "michael.smith@example.com",
+        "phone": "(555) 987-6543",
+        "location": "San Diego, CA",
+        "linkedin": null
+    },
+    "professional_summary": "Civil Engineering professional with experience in complex engineering designs, project management, and plumbing/pipefitting. Focused on contributing skills and experience to further organizational development and achieve professional growth.",
+    "work_experience": [
+        {
+            "job_title": "Engineering Intern",
+            "company": "Company Name",
+            "duration": "2015-Present",
+            "location": "City, State",
+            "description": "Performs complex engineering designs and aids in construction planning",
+            "responsibilities": [
+                "Performs complex engineering designs for preliminary and final engineering plans",
+                "Creates specifications and cost estimates for construction projects",
+                "Performs engineering calculations for hydrology/hydraulic structures",
+                "Prepares legal descriptions and grant deeds for easements",
+                "Helps design and coordinate construction improvement projects",
+                "Attends meetings and makes presentations to various committees"
+            ]
+        },
+        {
+            "job_title": "Preload Supervisor",
+            "company": "Company Name",
+            "duration": "2011-2015",
+            "location": "City, State",
+            "description": "Managed department resources and supervised team of 7 workers",
+            "responsibilities": [
+                "Managed department resources for maximum output and efficiency",
+                "Directed daily trans load activities",
+                "Established positive team-oriented work environment",
+                "Implemented employee personal development plans",
+                "Maintained safety policy compliance"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Bachelor of Science",
+            "field_of_study": "Civil Engineering",
+            "institution": "San Diego State University",
+            "graduation_year": "2017",
+            "gpa": null,
+            "location": "City, State"
+        },
+        {
+            "degree": "Associate of Science",
+            "field_of_study": "Airframe Power Plant",
+            "institution": "Vincennes University/Purdue University ATC",
+            "graduation_year": "2002",
+            "gpa": null,
+            "location": "City, State"
+        }
+    ],
+    "skills": [
+        "Engineering Design",
+        "Project Management",
+        "Construction Planning",
+        "Technical Documentation",
+        "Team Leadership",
+        "Safety Compliance"
+    ],
+    "certifications": [
+        {
+            "name": "Professional Project Manager BootCamp",
+            "issuer": "PMP Institute",
+            "year": "2008",
+            "expiry": null
+        },
+        {
+            "name": "NITC Plumbing/Pipe Fitting Journeyman License",
+            "issuer": "Local 525 Plumbing Apprenticeship Hall",
+            "year": "2004",
+            "expiry": null
+        }
+    ],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 8,
+    "seniority_level": "Junior",
+    "keywords": ["Civil Engineering", "Construction", "Project Management", "Engineering Design", "Hydraulics"],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/74236636.pdf"
+}

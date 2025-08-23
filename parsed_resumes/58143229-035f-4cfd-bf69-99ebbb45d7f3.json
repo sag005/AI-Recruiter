@@ -1,0 +1,58 @@
+{
+    "personal_info": {
+        "name": "Michael Chen",
+        "email": "m.chen@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Seattle, WA",
+        "linkedin": null
+    },
+    "professional_summary": "Self-motivated, innovative and goal-oriented Industrial Engineer, Project Manager and Team Leader dedicated to boosting company revenue through exceptional leadership and rigorous cost and schedule control techniques. Experienced in process improvement and efficiency optimization.",
+    "work_experience": [
+        {
+            "job_title": "737 Industrial Engineering Manager",
+            "company": "Company Name",
+            "duration": "2014-Present",
+            "location": "City, State",
+            "description": "Lead Industrial Engineering team supporting 737 Wing Seal, Test, Paint and Systems Installation build processes",
+            "responsibilities": [
+                "Managed Industrial Engineering team achieving $1.5M in cost savings",
+                "Led team in production scheduling and shop operating rhythm",
+                "Tracked metrics and managed major shop recoveries",
+                "Supported manufacturing Senior Managers in Rate and MAX readiness projects",
+                "Managed recurring and nonrecurring statement of work"
+            ]
+        },
+        {
+            "job_title": "Industrial Engineer / Project Manager",
+            "company": "Company Name",
+            "duration": "2008-2009",
+            "location": "City, State",
+            "description": "Managed Sine Wave Fab-Cell statement of work for 787-9 implementation",
+            "responsibilities": [
+                "Negotiated priorities and schedule in DIE exercises with cross functional team",
+                "Performed risk analysis and mitigation",
+                "Developed cost estimates for division and program",
+                "Led Green Rooms for production management",
+                "Analyzed value stream including capabilities and capacity"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Project planning and development",
+        "Strategic planning",
+        "Lean manufacturing and design",
+        "Analytical skills",
+        "Team leadership",
+        "Procedure development",
+        "Process improvement",
+        "Cost control"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 15,
+    "seniority_level": "Senior",
+    "keywords": ["Industrial Engineering", "Project Management", "Manufacturing", "Process Improvement", "Team Leadership", "Lean Manufacturing"],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/49127329.pdf"
+}

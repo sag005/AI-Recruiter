@@ -1,0 +1,73 @@
+{
+    "personal_info": {
+        "name": "Sarah Miller",
+        "email": "sarah.miller@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Portland, OR",
+        "linkedin": null
+    },
+    "professional_summary": "Experienced Branch Manager and Floral Designer with proven track record of exceeding sales goals, building customer relationships, and delivering high-quality customer service. Strong leadership skills in staff development and business operations management.",
+    "work_experience": [
+        {
+            "job_title": "Branch Manager/Floral Designer",
+            "company": "Company Name",
+            "duration": "2012-Present",
+            "location": "City, State",
+            "description": "Managing branch operations, customer service, and floral design while leading team and maintaining sales goals",
+            "responsibilities": [
+                "Managed customer service and administrative tasks",
+                "Ensured superior customer experience",
+                "Implemented merchandising standards and displays",
+                "Supervised merchandise and shipment processing",
+                "Managed purchasing budget and expenses",
+                "Led team development and training"
+            ]
+        },
+        {
+            "job_title": "Bi-Lingual Customer Service Representative",
+            "company": "Company Name",
+            "duration": "2010-2011",
+            "location": "City, State",
+            "description": "Provided bilingual customer support for medical supplies and medication orders",
+            "responsibilities": [
+                "Assisted Spanish-speaking customers with medication orders and refills",
+                "Explained insurance benefits and verified medical supplies",
+                "Processed credit card payments and handled customer accounts",
+                "Met daily, weekly, and monthly production quotas"
+            ]
+        },
+        {
+            "job_title": "Customer Service Representative",
+            "company": "Company Name",
+            "duration": "2009-2010",
+            "location": "City, State",
+            "description": "Handled insurance verification and customer support in a production-based environment",
+            "responsibilities": [
+                "Verified insurance benefits",
+                "Performed data entry tasks",
+                "Assisted case managers with daily case load",
+                "Managed inbound and outbound customer calls"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Staff Training",
+        "Customer Service",
+        "Sales Management",
+        "Inventory Control",
+        "Budgeting",
+        "Microsoft Office",
+        "Bilingual Spanish",
+        "Leadership",
+        "Merchandising",
+        "Financial Management"
+    ],
+    "certifications": [],
+    "languages": ["English", "Spanish"],
+    "category": "Management",
+    "years_of_experience": 14,
+    "seniority_level": "Senior",
+    "keywords": ["Branch Manager", "Floral Designer", "Customer Service", "Sales", "Team Leadership"],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/DESIGNER/29865476.pdf"
+}

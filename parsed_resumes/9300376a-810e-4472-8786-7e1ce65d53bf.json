@@ -1,0 +1,76 @@
+{
+    "personal_info": {
+        "name": "Rose Bloomfield",
+        "email": "rose.bloomfield@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Portland, OR",
+        "linkedin": null
+    },
+    "professional_summary": "Experienced Floral Designer with over six years of expertise in artistic floral arrangements, specializing in wedding decorations, bouquets, and wreaths. Proven track record in creating high-end arrangements for VIP clients and managing complex floral projects.",
+    "work_experience": [
+        {
+            "job_title": "Floral Designer",
+            "company": "Company Name",
+            "duration": "2017-present",
+            "location": "City, State",
+            "description": "Lead floral designer for various projects",
+            "responsibilities": []
+        },
+        {
+            "job_title": "Floral Designer",
+            "company": "Company Name",
+            "duration": "2015-2016",
+            "location": "City, State",
+            "description": "Luxury hotel floral designer",
+            "responsibilities": [
+                "Decorated luxurious rooms for VIP guests including Presidents and royalty",
+                "Ordered and purchased flowers from growers and wholesalers",
+                "Designed lobby flower arrangements",
+                "Decorated private hotel rooms and private dinners",
+                "Designed and arranged spiral bouquets for guests"
+            ]
+        },
+        {
+            "job_title": "Floral Designer",
+            "company": "Company Name",
+            "duration": "2011-2013",
+            "location": "City, State",
+            "description": "Retail and event floral designer",
+            "responsibilities": [
+                "Designed holiday, wedding, and graduation event displays",
+                "Decorated hotel halls and private rooms",
+                "Managed flower inventory and maintenance",
+                "Processed customer orders and provided plant care advice"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Art Studies",
+            "field_of_study": "Art",
+            "institution": "Republican Art College",
+            "graduation_year": "2003",
+            "gpa": null,
+            "location": "City, Uzbekistan"
+        }
+    ],
+    "skills": [
+        "Floral arrangement",
+        "Wedding decorations",
+        "Color theory",
+        "Customer service",
+        "Bouquet design",
+        "Event decoration",
+        "Inventory management",
+        "Painting",
+        "Photography",
+        "Piano"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Design",
+    "years_of_experience": 6,
+    "seniority_level": "Senior",
+    "keywords": ["floral design", "wedding arrangements", "event decoration", "bouquet design", "luxury hospitality"],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/DESIGNER/15936656.pdf"
+}

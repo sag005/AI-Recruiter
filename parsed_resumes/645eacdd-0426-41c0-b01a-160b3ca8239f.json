@@ -1,0 +1,74 @@
+{
+    "personal_info": {
+        "name": "Mark Wilson",
+        "email": "mark.wilson@example.com",
+        "phone": "(513) 555-8899",
+        "location": "Cincinnati, OH",
+        "linkedin": null
+    },
+    "professional_summary": "Highly motivated professional with refined sales, marketing, and managerial skills focused on growing revenue and profits. Consistently ranked in top 5% of sales performers, with extensive experience in B2B information technology and print advertising services in Cincinnati and Columbus metropolitan areas. Expert in working with diverse clientele from multinational corporations to smaller organizations.",
+    "work_experience": [
+        {
+            "job_title": "Business Development Executive",
+            "company": "PCMS",
+            "duration": "2013-Current",
+            "location": "Cincinnati, OH",
+            "description": "Selling IT converged infrastructure consulting services, hardware and software solutions in Greater Cincinnati area",
+            "responsibilities": [
+                "Ranked #1 in account growth and new sales",
+                "Responsible for over $1 million in revenue",
+                "Mentored new sales representatives",
+                "Added billing consultants representing 25% of company revenue",
+                "Managed accounts including Intelligrated, KAO, Great Oaks, Schulman"
+            ]
+        },
+        {
+            "job_title": "Business Development Executive",
+            "company": "Star Base",
+            "duration": "2011-2013",
+            "location": "Cincinnati, OH",
+            "description": "Managed IT services sales in Cincinnati, Dayton and N. Kentucky market",
+            "responsibilities": [
+                "Achieved revenues over $950,000",
+                "Managed major accounts including Luxottica, Great American, Toyota",
+                "Responsible for new and ongoing marketing initiatives"
+            ]
+        },
+        {
+            "job_title": "National Account Manager",
+            "company": "SupplyLink",
+            "duration": "2008-2011",
+            "location": "Cincinnati, OH",
+            "description": "Introduced SupplyLink-Leads program to Building Product Manufacturers and National Building Distributors",
+            "responsibilities": []
+        }
+    ],
+    "education": [],
+    "skills": [
+        "MS Office",
+        "ACT!",
+        "Goldmine",
+        "Salesforce.com",
+        "Sandler Sales Methodology",
+        "B2B Sales",
+        "Strategic Planning",
+        "Revenue Growth",
+        "Account Management",
+        "Business Development"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Sales",
+    "years_of_experience": 15,
+    "seniority_level": "Senior",
+    "keywords": [
+        "Business Development",
+        "Sales",
+        "IT Services",
+        "Account Management",
+        "Revenue Growth",
+        "CRM",
+        "B2B Sales"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/BUSINESS-DEVELOPMENT/16846478.pdf"
+}

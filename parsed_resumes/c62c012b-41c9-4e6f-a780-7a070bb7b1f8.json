@@ -1,0 +1,68 @@
+{
+    "personal_info": {
+        "name": "Michael Smith",
+        "email": "michael.smith@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Boston, MA",
+        "linkedin": null
+    },
+    "professional_summary": "Over 14 years of experience in Class II and III medical device manufacturing, molecular diagnostics, and biotechnology, with 8 years managing engineers, technicians, and supervisors. Strong technical leadership with expertise in data analysis and statistics for manufacturing process improvement.",
+    "work_experience": [
+        {
+            "job_title": "Manager, Quality Engineering",
+            "company": "Company Name",
+            "duration": "2014-Present",
+            "location": "City, State",
+            "description": "Managing Quality Engineering Team, Complaints Department, and Metrology Department at Class II and III medical device manufacturing facility",
+            "responsibilities": [
+                "Manage Quality Engineering Team, Complaints Department, and Metrology Department",
+                "Improve site compliance and reduce recurring deviations through NCR Investigations",
+                "Investigate customer complaints and interface with regulatory groups",
+                "Direct teams for Calibration support across two facilities",
+                "Provide leadership and development for direct reports"
+            ]
+        },
+        {
+            "job_title": "Senior Engineer II",
+            "company": "Company Name",
+            "duration": "2011-2014",
+            "location": "City, State",
+            "description": "Managed Process Engineering and Automation Groups for Class II/III surgically implantable optic device manufacturing",
+            "responsibilities": [
+                "Led Process Engineering and Automation Groups",
+                "Improved AcrySof manufacturing yield",
+                "Reduced particulate reject rate by 50%",
+                "Implemented automation projects with 1-3 year payback periods",
+                "Managed departmental and automation budgets"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "ProEngineer/CREO",
+        "MiniTab",
+        "MS Office Suite",
+        "MS Project",
+        "MS Visio",
+        "Injection Molding",
+        "Trackwise",
+        "Catsweb",
+        "Process Control",
+        "Quality Engineering",
+        "Project Management"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 14,
+    "seniority_level": "Senior",
+    "keywords": [
+        "medical devices",
+        "quality engineering",
+        "process improvement",
+        "automation",
+        "manufacturing",
+        "team management"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/33685075.pdf"
+}

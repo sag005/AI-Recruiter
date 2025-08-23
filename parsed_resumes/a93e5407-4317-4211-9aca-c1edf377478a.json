@@ -1,0 +1,84 @@
+{
+    "personal_info": {
+        "name": "Michael Smith",
+        "email": "michael.smith@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Chicago, IL",
+        "linkedin": null
+    },
+    "professional_summary": "Mechanical Engineering professional with expertise in CAD/CAM systems, Finite Element Analysis, and mechanical design. Experienced in product design and development with strong background in industrial robotics and automotive engineering.",
+    "work_experience": [
+        {
+            "job_title": "Finite Element Analysis Engineer",
+            "company": "Illinois Institute of Technology",
+            "duration": "2016-2016",
+            "location": "Chicago, IL",
+            "description": "Led robotic assembly analysis and design projects",
+            "responsibilities": [
+                "Designed 6-axis SCARA Robot for automotive industry pick and place operations",
+                "Performed static analysis with stainless steel 304",
+                "Optimized design using OptiStruct",
+                "Conducted dynamic analysis simulations"
+            ]
+        },
+        {
+            "job_title": "Mechanical Engineering Intern",
+            "company": "Company Name",
+            "duration": "2013-2014",
+            "location": "Chicago, IL",
+            "description": "Automotive engineering and maintenance",
+            "responsibilities": [
+                "Performed failure investigation in mufflers",
+                "Established maintenance procedures and safety protocols",
+                "Conducted vibration analysis on vehicles",
+                "Developed failure reports for automotive industry"
+            ]
+        },
+        {
+            "job_title": "Manufacturing Engineering Intern",
+            "company": "Company Name",
+            "duration": "2012-2012",
+            "location": null,
+            "description": "Manufacturing process analysis",
+            "responsibilities": [
+                "Analyzed automation and process parameters"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Project Experience",
+            "field_of_study": "Mechanical Engineering",
+            "institution": "Illinois Institute of Technology",
+            "graduation_year": "2016",
+            "gpa": null,
+            "location": "Chicago, IL"
+        }
+    ],
+    "skills": [
+        "CAD (SolidWorks, Autodesk Inventor, AutoCAD, CATIA, PTC CREO)",
+        "CAE Software (HyperMesh, Abaqus, ANSYS, Optistruct)",
+        "Finite Element Analysis",
+        "GD&T",
+        "Sheet Metal Design",
+        "Rapid Prototyping",
+        "3D Printing",
+        "Mechanical Design",
+        "Product Design"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 5,
+    "seniority_level": "Junior",
+    "keywords": [
+        "mechanical engineering",
+        "CAD",
+        "CAM",
+        "FEA",
+        "product design",
+        "robotics",
+        "automotive"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/10985403.pdf"
+}

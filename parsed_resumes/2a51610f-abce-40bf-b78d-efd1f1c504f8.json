@@ -1,0 +1,64 @@
+{
+    "personal_info": {
+        "name": "Michael Smith",
+        "email": "michael.smith@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Minneapolis, MN",
+        "linkedin": null
+    },
+    "professional_summary": "Experienced Engineering Technician with extensive background in civil engineering, specializing in design/drafting, storm water utility assessment, surveying, and construction inspection. Proven expertise in using various technical software and equipment for infrastructure projects.",
+    "work_experience": [
+        {
+            "job_title": "Engineering Technician",
+            "company": "City Engineering Department",
+            "duration": "2007-Present",
+            "location": "City, State",
+            "description": "Civil engineering technician focusing on capital improvement projects and infrastructure management",
+            "responsibilities": [
+                "Design and drafting of capital improvement projects using Microstation and GeoPak",
+                "Storm Water Utility Assessment using ArcView and Microsoft Access",
+                "Performing topographic surveys with Trimble GPS and Topcon Total Station",
+                "Maintaining base map drawings of subdivisions and infrastructure"
+            ]
+        },
+        {
+            "job_title": "Senior Engineering Technician",
+            "company": "Municipal Engineering Office",
+            "duration": "2006-2007",
+            "location": "City, State",
+            "description": "Senior role handling surveying, construction inspection, and design projects",
+            "responsibilities": [
+                "Conducting topographic, land, and construction surveys",
+                "Construction inspection for various infrastructure projects",
+                "Design of street reconstruction and storm sewer projects",
+                "Drafting survey plats and corner certificates using AutoCAD and Eagle Point"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Microstation",
+        "GeoPak",
+        "ArcView",
+        "Microsoft Access",
+        "AutoCAD",
+        "Eagle Point",
+        "GPS Surveying",
+        "Construction Inspection",
+        "Civil Engineering Design",
+        "Infrastructure Planning"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 15,
+    "seniority_level": "Senior",
+    "keywords": [
+        "civil engineering",
+        "surveying",
+        "drafting",
+        "construction inspection",
+        "infrastructure"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/28005884.pdf"
+}

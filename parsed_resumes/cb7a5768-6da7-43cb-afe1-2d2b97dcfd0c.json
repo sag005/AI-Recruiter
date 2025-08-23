@@ -1,0 +1,63 @@
+{
+    "personal_info": {
+        "name": "Robert Smith",
+        "email": "robert.smith@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Remote",
+        "linkedin": null
+    },
+    "professional_summary": "Technical Support Engineer with 4 years of experience in troubleshooting and maintaining user applications, workstations, and accounts across multiple platforms (OS X, Linux, Windows, Android, iOS). Skilled in providing outstanding customer service and communicating technical concepts in a non-technical manner. Expertise in software/PC/LAN troubleshooting and telecom support.",
+    "work_experience": [
+        {
+            "job_title": "Corporate Engineering Support Technician",
+            "company": "Company Name",
+            "duration": "2015-Present",
+            "location": "Remote",
+            "description": "Providing remote technical support for over 120,000 employees across multiple platforms",
+            "responsibilities": [
+                "Remote support for 120,000+ employees",
+                "Supporting Windows, OS X, Linux, and ChromeOS platforms",
+                "Installing and configuring end user software and system management software",
+                "Managing user account access with Active Directory and Google Groups",
+                "User account management and security policy implementation",
+                "Collaboration with IT infrastructure teams"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Windows 7-10",
+        "Ubuntu 14.04",
+        "OS X",
+        "ChromeOS",
+        "iOS9",
+        "Android",
+        "MS Office 2010-2016",
+        "Google Apps",
+        "OpenVPN",
+        "Wireshark",
+        "SCCM 2012",
+        "TCP/IP",
+        "DNS",
+        "DHCP",
+        "LAN/WAN",
+        "Active Directory",
+        "Technical Support",
+        "Network Security",
+        "System Administration"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 4,
+    "seniority_level": "Mid-Level",
+    "keywords": [
+        "Technical Support",
+        "System Administration",
+        "Network Administration",
+        "IT Infrastructure",
+        "Help Desk",
+        "Troubleshooting"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/22890839.pdf"
+}

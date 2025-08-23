@@ -1,0 +1,94 @@
+{
+    "personal_info": {
+        "name": "Michael Chen",
+        "email": "m.chen@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Phoenix, AZ",
+        "linkedin": null
+    },
+    "professional_summary": "Driven and self-motivated Mechanical Engineer with experience teaching Mechanical Engineering courses to undergraduate students, specializing in tutoring and academic instruction. Expertise in mechanical engineering concepts, project management, and educational leadership.",
+    "work_experience": [
+        {
+            "job_title": "Mechanical Engineering Tutor",
+            "company": "Company Name",
+            "duration": "2014-2015",
+            "location": null,
+            "description": "Provided tutoring in mechanical engineering subjects",
+            "responsibilities": [
+                "Tutored subjects including Mechanics, Probability and Statistics, MATLAB, Operations Research, Calculus",
+                "Helped students understand basic concepts of Physics and Calculus"
+            ]
+        },
+        {
+            "job_title": "Assistant Professor",
+            "company": "Company Name",
+            "duration": "2013-2014",
+            "location": null,
+            "description": "Academic instruction and student mentorship",
+            "responsibilities": [
+                "Developed coursework and lectured for 120 undergraduate students",
+                "Taught Heat and Mass Transfer, Strength of Materials",
+                "Mentored undergraduate students for their final year project",
+                "Served as Faculty In-charge of Mechanical Engineering students association"
+            ]
+        },
+        {
+            "job_title": "Intern",
+            "company": "Company Name",
+            "duration": "2010-2013",
+            "location": null,
+            "description": "Engineering design and project management",
+            "responsibilities": [
+                "Developed Central Chilled water plant system layout for 45000sq.ft. Retail outlet",
+                "Headed intern team and presented weekly progress reports",
+                "Conducted analysis of LASER Cladding at IIT Bombay",
+                "Designed banking database management system"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Master of Science",
+            "field_of_study": "Industrial Engineering",
+            "institution": "Arizona State University",
+            "graduation_year": "2016",
+            "gpa": 3.15,
+            "location": "Arizona"
+        },
+        {
+            "degree": "Bachelor of Engineering",
+            "field_of_study": "Mechanical Engineering",
+            "institution": "University of Mumbai",
+            "graduation_year": "2011",
+            "gpa": 3.9,
+            "location": "Mumbai"
+        }
+    ],
+    "skills": [
+        "Microsoft Office",
+        "AutoCAD",
+        "MATLAB",
+        "Heat and Mass Transfer",
+        "Project Management",
+        "Database Management",
+        "MySQL",
+        "VBA",
+        "AMPL",
+        "Teaching"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 5,
+    "seniority_level": "Mid-Level",
+    "keywords": [
+        "Mechanical Engineering",
+        "Teaching",
+        "Project Management",
+        "Design",
+        "Database Management",
+        "AutoCAD",
+        "MATLAB"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/30288581.pdf"
+}
