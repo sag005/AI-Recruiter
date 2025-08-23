@@ -249,6 +249,23 @@ clean:
     find . -name "*.pyc" -delete
     @echo "✅ Cleanup complete!"
 
+# Run the Flask web application
+web:
+    @echo "🚀 Starting AI Recruiter Web App..."
+    @echo "📡 Server will be available at http://localhost:5000"
+    @echo "Press Ctrl+C to stop the server"
+    @echo ""
+    uv run python app.py
+
+# Run Flask app in development mode with auto-reload
+web-dev:
+    @echo "🚀 Starting AI Recruiter Web App (Development Mode)..."
+    @echo "📡 Server will be available at http://localhost:5000"
+    @echo "🔄 Auto-reload enabled"
+    @echo "Press Ctrl+C to stop the server"
+    @echo ""
+    FLASK_ENV=development FLASK_DEBUG=1 uv run python app.py
+
 # Show system info
 info:
     @echo "🔍 AI Recruiter System Information"

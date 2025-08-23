@@ -1,0 +1,103 @@
+{
+    "personal_info": {
+        "name": "Rohan Mishra",
+        "email": "rohan.mishra1997@gmail.com",
+        "phone": null,
+        "location": "New York",
+        "linkedin": null
+    },
+    "professional_summary": "Senior Software Engineer with expertise in backend development, machine learning, and system optimization. Demonstrated success in cost reduction, performance optimization, and leading technical projects across multiple organizations including Taktile, Adobe, and Citi.",
+    "work_experience": [
+        {
+            "job_title": "Senior Software Engineer",
+            "company": "Taktile",
+            "duration": "2024-Present",
+            "location": "New York",
+            "description": "Leading technical projects and backend development",
+            "responsibilities": [
+                "Led AWS Aurora storage cost reduction project achieving 80% reduction",
+                "Lead batch processing project increasing throughput",
+                "Chaired Backend Chapter and conducted technical talks"
+            ]
+        },
+        {
+            "job_title": "Software Engineer",
+            "company": "Taktile",
+            "duration": "2021-2022",
+            "location": "Berlin",
+            "description": "ML infrastructure and authentication systems development",
+            "responsibilities": [
+                "Optimized ML Inference servers reducing memory usage by 85%",
+                "Led customer PoC implementation increasing ARR by 35%",
+                "Implemented OAuth authentication and RBAC-based authorization service"
+            ]
+        },
+        {
+            "job_title": "Machine Learning Engineer Intern",
+            "company": "Adobe",
+            "duration": "2023-2023",
+            "location": "San Jose",
+            "description": "Development of ML components for Adobe Products",
+            "responsibilities": [
+                "Developed Related Query Suggestions component",
+                "Designed offline evaluation protocol for Query Suggestion models",
+                "Improved null result reduction by 60%"
+            ]
+        },
+        {
+            "job_title": "Software Engineer",
+            "company": "Citi",
+            "duration": "2019-2021",
+            "location": "Pune",
+            "description": "ML platform development and process optimization",
+            "responsibilities": [
+                "Designed internal Machine Learning platform",
+                "Developed cash and stock reconciliation optimization product",
+                "Created pipelines for MIM Analysis Tool"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Masters",
+            "field_of_study": "Computer Science",
+            "institution": "University of California, San Diego",
+            "graduation_year": "2023",
+            "gpa": null,
+            "location": "San Diego"
+        },
+        {
+            "degree": "Bachelors in Technology",
+            "field_of_study": "Software Engineering",
+            "institution": "Delhi Technological University",
+            "graduation_year": "2019",
+            "gpa": null,
+            "location": "New Delhi"
+        }
+    ],
+    "skills": [
+        "Machine Learning",
+        "Backend Development",
+        "AWS",
+        "System Optimization",
+        "OAuth",
+        "RBAC",
+        "Python",
+        "Software Engineering"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 5,
+    "seniority_level": "Senior",
+    "keywords": [
+        "Machine Learning",
+        "AWS",
+        "Backend",
+        "Software Engineering",
+        "System Optimization",
+        "Authentication",
+        "Authorization"
+    ],
+    "pdf_path": "uploads/20250824_002639_961b6f1d-5818-46a4-9b92-25683995385a_resume_24.pdf"
+}

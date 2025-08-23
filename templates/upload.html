@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Resume - AI Recruiter{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-file-upload"></i> Upload New Resume</h1>
+        <p>Add candidates to your talent pool</p>
+    </div>
+
+    <div class="upload-section">
+        <div id="dropZone" class="drop-zone">
+            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+            <h3>Drag & Drop Resume Here</h3>
+            <p>or</p>
+            <input type="file" id="fileInput" accept=".pdf" hidden>
+            <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                <i class="fas fa-folder-open"></i> Browse Files
+            </button>
+            <p class="file-types">Supported: PDF (Max 10MB)</p>
+        </div>
+
+        <div id="processingStatus" class="processing-status" style="display: none;">
+            <h3>Processing Status</h3>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div class="status-steps">
+                <div class="status-step" id="step-uploaded">
+                    <i class="fas fa-check-circle"></i>
+                    <span>File uploaded</span>
+                </div>
+                <div class="status-step" id="step-extracting">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Extracting text</span>
+                </div>
+                <div class="status-step" id="step-parsing">
+                    <i class="far fa-circle"></i>
+                    <span>Parsing resume data</span>
+                </div>
+                <div class="status-step" id="step-embedding">
+                    <i class="far fa-circle"></i>
+                    <span>Generating embeddings</span>
+                </div>
+                <div class="status-step" id="step-storing">
+                    <i class="far fa-circle"></i>
+                    <span>Storing in database</span>
+                </div>
+            </div>
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="errorText"></span>
+        </div>
+
+        <div id="successMessage" class="success-message" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            <span>Resume processed successfully!</span>
+        </div>
+    </div>
+
+    <div class="recent-uploads">
+        <h2><i class="fas fa-history"></i> Recent Uploads</h2>
+        {% if recent_uploads %}
+        <div class="upload-list">
+            {% for upload in recent_uploads %}
+            <div class="upload-item">
+                <div class="upload-info">
+                    <i class="fas fa-file-pdf"></i>
+                    <span class="filename">{{ upload.filename }}</span>
+                    <span class="timestamp">{{ upload.timestamp }}</span>
+                </div>
+                <div class="upload-status">
+                    {% if upload.status == 'success' %}
+                    <span class="status-badge success">
+                        <i class="fas fa-check"></i> Success
+                    </span>
+                    {% else %}
+                    <span class="status-badge error">
+                        <i class="fas fa-times"></i> Error
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-uploads">No recent uploads</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Drag and drop functionality
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+let currentUploadId = null;
+let statusCheckInterval = null;
+
+// Prevent default drag behaviors
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, preventDefaults, false);
+    document.body.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+// Highlight drop zone when item is dragged over it
+['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, unhighlight, false);
+});
+
+function highlight(e) {
+    dropZone.classList.add('highlight');
+}
+
+function unhighlight(e) {
+    dropZone.classList.remove('highlight');
+}
+
+// Handle dropped files
+dropZone.addEventListener('drop', handleDrop, false);
+
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    handleFiles(files);
+}
+
+// Handle file selection
+fileInput.addEventListener('change', function(e) {
+    handleFiles(this.files);
+});
+
+function handleFiles(files) {
+    if (files.length > 0) {
+        uploadFile(files[0]);
+    }
+}
+
+function uploadFile(file) {
+    // Validate file
+    const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!validTypes.includes(file.type)) {
+        showError('Invalid file type. Please upload a PDF or DOCX file.');
+        return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+        showError('File too large. Maximum size is 10MB.');
+        return;
+    }
+
+    // Create FormData
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Reset UI
+    hideMessages();
+    document.getElementById('processingStatus').style.display = 'block';
+    resetStatusSteps();
+
+    // Upload file
+    fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            showError(data.error);
+        } else {
+            currentUploadId = data.upload_id;
+            startStatusPolling();
+        }
+    })
+    .catch(error => {
+        showError('Upload failed: ' + error.message);
+    });
+}
+
+function startStatusPolling() {
+    statusCheckInterval = setInterval(checkStatus, 1000);
+}
+
+function checkStatus() {
+    if (!currentUploadId) return;
+
+    fetch(`/api/status/${currentUploadId}`)
+        .then(response => response.json())
+        .then(data => {
+            updateProgress(data.progress || 0);
+            updateStatusSteps(data.steps);
+            
+            if (data.status === 'completed') {
+                clearInterval(statusCheckInterval);
+                showSuccess();
+                setTimeout(() => location.reload(), 2000);
+            } else if (data.status === 'error') {
+                clearInterval(statusCheckInterval);
+                showError(data.error || 'Processing failed');
+            }
+        })
+        .catch(error => {
+            clearInterval(statusCheckInterval);
+            showError('Status check failed');
+        });
+}
+
+function updateProgress(progress) {
+    document.getElementById('progressFill').style.width = progress + '%';
+}
+
+function updateStatusSteps(steps) {
+    if (!steps) return;
+    
+    Object.keys(steps).forEach(step => {
+        const element = document.getElementById(`step-${step}`);
+        if (element) {
+            const icon = element.querySelector('i');
+            if (steps[step]) {
+                icon.className = 'fas fa-check-circle';
+                element.classList.add('completed');
+            } else if (element.classList.contains('active')) {
+                icon.className = 'fas fa-spinner fa-spin';
+            }
+        }
+    });
+}
+
+function resetStatusSteps() {
+    document.querySelectorAll('.status-step').forEach(step => {
+        step.classList.remove('completed', 'active');
+        const icon = step.querySelector('i');
+        icon.className = 'far fa-circle';
+    });
+}
+
+function showError(message) {
+    hideMessages();
+    const errorDiv = document.getElementById('errorMessage');
+    document.getElementById('errorText').textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function showSuccess() {
+    hideMessages();
+    document.getElementById('successMessage').style.display = 'block';
+}
+
+function hideMessages() {
+    document.getElementById('errorMessage').style.display = 'none';
+    document.getElementById('successMessage').style.display = 'none';
+}
+</script>
+{% endblock %}
