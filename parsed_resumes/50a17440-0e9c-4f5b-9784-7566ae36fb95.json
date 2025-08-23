@@ -1,0 +1,68 @@
+{
+    "personal_info": {
+        "name": "Michael Chen",
+        "email": "m.chen.design@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Chicago, IL",
+        "linkedin": null
+    },
+    "professional_summary": "Senior Graphic Designer with expertise in Cross-Channel Marketing, Brand Creation & Reinvention, and 3D modeling/rendering. Proficient in multiple design software including 3dsMax, Maya, Softimage, and Adobe Creative Suite. Experienced in managing multiple projects and leading design teams while maintaining brand consistency and high visual communication standards.",
+    "work_experience": [
+        {
+            "job_title": "Lead Senior Graphic Designer",
+            "company": "Company Name",
+            "duration": "2014-Present",
+            "location": "City, State",
+            "description": "Lead 3D modeling and graphic design professional managing cross-channel marketing and brand consistency projects",
+            "responsibilities": [
+                "Using 3dsMax, Maya, Softimage, Vray and Mental ray for 3D modeling and rendering",
+                "Managing 3D lighting and shaders with Vray and Mental ray",
+                "Performing detailed hard surface polygonal modeling for automotive, mechanical, product and architectural projects",
+                "Supervising and setting standards for graphic design team",
+                "Managing projects for major brands including McDonalds, Coca Cola, KFC, Jack Daniels, and others",
+                "Reviewing and enhancing team deliverables before client submission",
+                "Advanced visualization of packaging for best-selling brands"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Autodesk 3DS Max",
+        "Autodesk Maya",
+        "Vray",
+        "Mental Ray",
+        "Adobe Photoshop",
+        "Adobe After Effects",
+        "Adobe Illustrator",
+        "Adobe Flash",
+        "Adobe Lightroom",
+        "Adobe Dreamweaver",
+        "Joomla",
+        "WordPress",
+        "HTML",
+        "SEO",
+        "ArtiosCAD",
+        "Zbrush",
+        "Keynote",
+        "Microsoft Office",
+        "PowerPoint",
+        "SolidWorks",
+        "3D Modeling",
+        "Lighting and Shading",
+        "Project Management"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Design",
+    "years_of_experience": 9,
+    "seniority_level": "Senior",
+    "keywords": [
+        "3D modeling",
+        "graphic design",
+        "brand management",
+        "team leadership",
+        "visual communication",
+        "cross-channel marketing"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/DESIGNER/42384185.pdf"
+}

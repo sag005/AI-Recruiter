@@ -1,0 +1,74 @@
+{
+    "personal_info": {
+        "name": "Michael Smith",
+        "email": "m.smith@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Chicago, IL",
+        "linkedin": null
+    },
+    "professional_summary": "Dedicated Engineering Manager with extensive experience in mechanical engineering, product design, and manufacturing. Proven expertise in project management, customer interface, and technical leadership with strong background in lighting fixture design and UL compliance.",
+    "work_experience": [
+        {
+            "job_title": "Engineering Manager",
+            "company": "Company Name",
+            "duration": "2013-Present",
+            "location": "City, State",
+            "description": "Managing manufacturing and engineering team while supporting US manufacturing startup",
+            "responsibilities": [
+                "Managed the manufacturing and engineering team",
+                "Supported manufacturing startup through mentoring and training",
+                "Provided technical solutions during project quotation process",
+                "Supervised fixture submission packages",
+                "Liaised with UL Inspector for compliance standards",
+                "Created fixture sample kits for sales representatives"
+            ]
+        },
+        {
+            "job_title": "Senior Design Engineer",
+            "company": "Company Name",
+            "duration": "2005-2013",
+            "location": "City, State",
+            "description": "Led design and development of lighting solutions and product concepts",
+            "responsibilities": [
+                "Collaborated with Architects and Lighting Designers",
+                "Prepared product concepts and submittal drawings",
+                "Evaluated and redesigned products for lean manufacturing",
+                "Managed cross-functional project teams",
+                "Supported Product Management in documentation"
+            ]
+        },
+        {
+            "job_title": "CAD Designer",
+            "company": "Company Name",
+            "duration": "2004-2005",
+            "location": "City, State",
+            "description": "Provided CAD design support",
+            "responsibilities": ["Analyzed customer specifications"]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Microsoft Office",
+        "Pro/ENGINEER",
+        "Pro/Mechanical",
+        "Solid Edge",
+        "AutoCAD",
+        "Microsoft Navision",
+        "Microsoft Project",
+        "Moldflow"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 18,
+    "seniority_level": "Senior",
+    "keywords": [
+        "Engineering Management",
+        "Manufacturing",
+        "Product Design",
+        "Project Management",
+        "UL Compliance",
+        "Technical Leadership"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/ENGINEERING/86828820.pdf"
+}

@@ -1,0 +1,68 @@
+{
+    "personal_info": {
+        "name": "Robert Anderson",
+        "email": "r.anderson@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Bradenton, FL",
+        "linkedin": null
+    },
+    "professional_summary": "Experienced Director of Business Development with expertise in financial operations, sales strategy, and business growth. Strong background in analyzing enterprise-wide negotiations and implementing business objectives.",
+    "work_experience": [
+        {
+            "job_title": "Director of Business Development",
+            "company": "Company Name",
+            "duration": "2014-Present",
+            "location": "Unknown, State",
+            "description": "Strategic business development leadership role",
+            "responsibilities": [
+                "Work alongside management team in advisory capacity",
+                "Coordinate and lead sales pursuit process",
+                "Implement business objectives and manage promotional campaigns",
+                "Achieve 20-30% capacity improvement in operations",
+                "Lead customer experience transformation initiatives"
+            ]
+        },
+        {
+            "job_title": "Fundraisor Director",
+            "company": "Company Name",
+            "duration": "2012-2014",
+            "location": "Unknown, State",
+            "description": "Leadership role in fundraising and proposal development",
+            "responsibilities": [
+                "Coordinate interdisciplinary proposal submissions",
+                "Develop new fundraising sources",
+                "Implement fundraising strategies",
+                "Enhance organization's reputation within donor community"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Word",
+        "Excel",
+        "PowerPoint",
+        "Adobe",
+        "Java",
+        "Oracle JD Edwards Enterprise",
+        "Epitome/WinAl",
+        "Data Collection",
+        "Internet",
+        "Social Media",
+        "Financial Analysis",
+        "Business Development",
+        "Strategic Planning"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Business Development",
+    "years_of_experience": 13,
+    "seniority_level": "Senior",
+    "keywords": [
+        "business development",
+        "sales strategy",
+        "fundraising",
+        "financial operations",
+        "strategic planning"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/BUSINESS-DEVELOPMENT/20427934.pdf"
+}

@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}Search Candidates - AI Recruiter{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-search"></i> Find Best Candidates</h1>
+        <p>Match candidates to your job requirements</p>
+    </div>
+
+    <div class="search-section">
+        <div class="job-form">
+            <div class="form-group">
+                <label for="jobTitle">Job Title</label>
+                <input type="text" id="jobTitle" class="form-control" placeholder="e.g., Senior Software Engineer">
+            </div>
+
+            <div class="form-group">
+                <label for="jobDescription">Job Description</label>
+                <textarea id="jobDescription" class="form-control" rows="10" 
+                          placeholder="Paste or type your job description here..."></textarea>
+            </div>
+
+            <div id="extractedRequirements" class="requirements-box" style="display: none;">
+                <h3><i class="fas fa-list-check"></i> Key Requirements (Auto-extracted)</h3>
+                <div id="requirementsList" class="requirements-list"></div>
+            </div>
+
+            <button id="extractBtn" class="btn btn-secondary" onclick="extractRequirements()">
+                <i class="fas fa-magic"></i> Extract Requirements
+            </button>
+            
+            <button id="searchBtn" class="btn btn-primary" onclick="searchCandidates()">
+                <i class="fas fa-search"></i> Search Candidates
+            </button>
+        </div>
+
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <p id="loadingText">Analyzing job requirements...</p>
+        </div>
+
+        <div id="searchResults" class="search-results" style="display: none;">
+            <h2>Top Matches</h2>
+            <div id="resultsContainer"></div>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="errorText"></span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentSearchId = null;
+let searchCheckInterval = null;
+
+function extractRequirements() {
+    const jobDescription = document.getElementById('jobDescription').value;
+    
+    if (!jobDescription.trim()) {
+        showError('Please enter a job description first');
+        return;
+    }
+
+    fetch('/api/extract_requirements', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            job_description: jobDescription
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.requirements && data.requirements.length > 0) {
+            displayRequirements(data.requirements);
+        } else {
+            showError('Could not extract requirements');
+        }
+    })
+    .catch(error => {
+        showError('Failed to extract requirements: ' + error.message);
+    });
+}
+
+function displayRequirements(requirements) {
+    const container = document.getElementById('requirementsList');
+    container.innerHTML = '';
+    
+    requirements.forEach(req => {
+        const item = document.createElement('div');
+        item.className = 'requirement-item';
+        item.innerHTML = `
+            <i class="fas fa-check"></i>
+            <span>${req}</span>
+        `;
+        container.appendChild(item);
+    });
+    
+    document.getElementById('extractedRequirements').style.display = 'block';
+}
+
+function searchCandidates() {
+    const jobTitle = document.getElementById('jobTitle').value;
+    const jobDescription = document.getElementById('jobDescription').value;
+    
+    if (!jobDescription.trim()) {
+        showError('Please enter a job description');
+        return;
+    }
+
+    // Hide previous results and errors
+    hideMessages();
+    document.getElementById('searchResults').style.display = 'none';
+    
+    // Show loading
+    document.getElementById('loadingIndicator').style.display = 'block';
+    document.getElementById('loadingText').textContent = 'Analyzing job requirements...';
+
+    // Start search
+    fetch('/api/search', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            job_title: jobTitle || 'Position',
+            job_description: jobDescription
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            showError(data.error);
+            document.getElementById('loadingIndicator').style.display = 'none';
+        } else {
+            currentSearchId = data.search_id;
+            startSearchPolling();
+        }
+    })
+    .catch(error => {
+        showError('Search failed: ' + error.message);
+        document.getElementById('loadingIndicator').style.display = 'none';
+    });
+}
+
+function startSearchPolling() {
+    searchCheckInterval = setInterval(checkSearchStatus, 2000);
+    checkSearchStatus(); // Check immediately
+}
+
+function checkSearchStatus() {
+    if (!currentSearchId) return;
+
+    fetch(`/api/search/${currentSearchId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'searching') {
+                document.getElementById('loadingText').textContent = data.progress || 'Searching candidates...';
+            } else if (data.status === 'completed') {
+                clearInterval(searchCheckInterval);
+                document.getElementById('loadingIndicator').style.display = 'none';
+                displayResults(data.results);
+            } else if (data.status === 'error') {
+                clearInterval(searchCheckInterval);
+                document.getElementById('loadingIndicator').style.display = 'none';
+                showError(data.error || 'Search failed');
+            }
+        })
+        .catch(error => {
+            clearInterval(searchCheckInterval);
+            document.getElementById('loadingIndicator').style.display = 'none';
+            showError('Status check failed');
+        });
+}
+
+function displayResults(results) {
+    const container = document.getElementById('resultsContainer');
+    container.innerHTML = '';
+    
+    if (!results || !results.candidates || results.candidates.length === 0) {
+        container.innerHTML = '<p class="no-results">No matching candidates found</p>';
+        document.getElementById('searchResults').style.display = 'block';
+        return;
+    }
+
+    // Display summary
+    const summary = document.createElement('div');
+    summary.className = 'results-summary';
+    summary.innerHTML = `
+        <p><strong>Found ${results.total_found} candidates</strong></p>
+        <p>${results.summary}</p>
+    `;
+    container.appendChild(summary);
+
+    // Display candidates
+    results.candidates.forEach((candidate, index) => {
+        const card = document.createElement('div');
+        card.className = 'candidate-card';
+        
+        const strengthsList = candidate.strengths.map(s => `<li>${s}</li>`).join('');
+        const concernsList = candidate.concerns.length > 0 
+            ? `<ul>${candidate.concerns.map(c => `<li>${c}</li>`).join('')}</ul>`
+            : '<p>No concerns identified</p>';
+        const experienceList = candidate.experience.map(e => `<li>${e}</li>`).join('');
+        
+        card.innerHTML = `
+            <div class="candidate-header">
+                <div class="candidate-rank">#${index + 1}</div>
+                <div class="candidate-info">
+                    <h3>${candidate.name}</h3>
+                    <div class="match-score">
+                        <span class="score-label">Match Score:</span>
+                        <span class="score-value">${candidate.match_score}%</span>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: ${candidate.match_score}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="candidate-body">
+                <div class="rationale">
+                    <h4><i class="fas fa-lightbulb"></i> Why this candidate?</h4>
+                    <p>${candidate.rationale}</p>
+                </div>
+                
+                <div class="candidate-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-star"></i> Key Strengths</h4>
+                        <ul>${strengthsList}</ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-briefcase"></i> Relevant Experience</h4>
+                        <ul>${experienceList}</ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-exclamation-circle"></i> Potential Concerns</h4>
+                        ${concernsList}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="candidate-actions">
+                <button class="btn btn-sm btn-primary">
+                    <i class="fas fa-user"></i> View Profile
+                </button>
+                <button class="btn btn-sm btn-secondary">
+                    <i class="fas fa-download"></i> Download Resume
+                </button>
+                <button class="btn btn-sm btn-secondary">
+                    <i class="fas fa-envelope"></i> Schedule Interview
+                </button>
+            </div>
+        `;
+        
+        container.appendChild(card);
+    });
+
+    document.getElementById('searchResults').style.display = 'block';
+}
+
+function showError(message) {
+    hideMessages();
+    const errorDiv = document.getElementById('errorMessage');
+    document.getElementById('errorText').textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function hideMessages() {
+    document.getElementById('errorMessage').style.display = 'none';
+}
+
+// Add sample job description
+function loadSampleJob() {
+    document.getElementById('jobTitle').value = 'Senior Creative Designer';
+    document.getElementById('jobDescription').value = `We are seeking a highly skilled Senior Creative Designer to join our dynamic marketing team. 
+
+Requirements:
+- 5+ years of professional design experience in advertising, branding, or digital media
+- Expert-level proficiency in Adobe Creative Suite, particularly Photoshop, Illustrator, and InDesign
+- Advanced Photoshop skills including photo retouching, compositing, and digital manipulation
+- Strong experience in 3D modeling and rendering software (Cinema 4D, Blender, or Maya preferred)
+- Experience with video editing and motion graphics (After Effects, Premiere Pro)
+- Portfolio demonstrating expertise in photo editing, digital art creation, and brand design
+- Experience with print and digital media design
+- Bachelor's degree in Graphic Design, Visual Arts, or related creative field
+
+Responsibilities:
+- Create stunning visual content for marketing campaigns and brand materials
+- Perform advanced photo retouching and image manipulation for product photography
+- Design digital assets for web, social media, and mobile platforms
+- Develop 3D models and renders for product visualization
+- Maintain brand consistency across all visual communications`;
+}
+
+// Add keyboard shortcut for sample job
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+        loadSampleJob();
+    }
+});
+</script>
+{% endblock %}

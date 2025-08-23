@@ -1,0 +1,68 @@
+{
+    "personal_info": {
+        "name": "Michael Anderson",
+        "email": "m.anderson@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Chicago, IL",
+        "linkedin": null
+    },
+    "professional_summary": "Hard working and energetic management professional focused on customer satisfaction throughout all stages of the sales life cycle. Proven experience in business development and administrative management with strong leadership and communication skills.",
+    "work_experience": [
+        {
+            "job_title": "Business Development Manager",
+            "company": "Company Name",
+            "duration": "2012-2015",
+            "location": "Not Specified",
+            "description": "Led business development initiatives and managed customer relationships while overseeing sales operations",
+            "responsibilities": [
+                "Resolve customer complaints regarding sales and service",
+                "Determine price schedules and discount rates",
+                "Review operational records and reports to project sales",
+                "Monitor customer preferences to determine focus of sales efforts",
+                "Direct and coordinate activities involving sales of manufactured products",
+                "Represent company at trade association meetings",
+                "Advise dealers and distributors on policies and operating procedures"
+            ]
+        },
+        {
+            "job_title": "Administrative Assistant",
+            "company": "Company Name",
+            "duration": "2008-2012",
+            "location": "Not Specified",
+            "description": "Managed administrative operations and financial record-keeping",
+            "responsibilities": [
+                "Direct and coordinate supportive services department",
+                "Prepare and review operational reports and schedules",
+                "Acquire, distribute and store supplies",
+                "Hire and terminate clerical and administrative personnel",
+                "Conduct training classes for staff",
+                "Manage financial records and accounting tasks"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Communication",
+        "Leadership",
+        "Customer Service",
+        "Sales Management",
+        "Multi-tasking",
+        "Financial Management",
+        "Team Management",
+        "Administrative Operations",
+        "Business Development"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Business Development",
+    "years_of_experience": 7,
+    "seniority_level": "Mid-Senior",
+    "keywords": [
+        "business development",
+        "sales management",
+        "customer service",
+        "administrative management",
+        "team leadership"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/BUSINESS-DEVELOPMENT/32385553.pdf"
+}

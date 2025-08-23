@@ -1,0 +1,72 @@
+{
+    "personal_info": {
+        "name": "Marcus Bradley",
+        "email": "marcus.bradley@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Chicago, IL",
+        "linkedin": null
+    },
+    "professional_summary": "A versatile and dynamic manager and marketing professional with more than 20 years of sales, management, marketing and promotional experience. A goal oriented and trusted leader with strong communication skills and ability to motivate teams.",
+    "work_experience": [
+        {
+            "job_title": "Partner; Business Development",
+            "company": "Company Name",
+            "duration": "2011-2014",
+            "location": "City, State",
+            "description": "Co-founded and developed a full service marketing agency specializing in event/experiential marketing",
+            "responsibilities": [
+                "Built and developed company's overall objectives and strategies",
+                "Created company capabilities documentation and presentation materials",
+                "Presented strategic marketing plans to prospective clients",
+                "Managed field teams and project budgets",
+                "Handled team recruitment and training"
+            ]
+        },
+        {
+            "job_title": "Regional Manager; Consumer Engagement",
+            "company": "Company Name",
+            "duration": "2009-2011",
+            "location": "City, State",
+            "description": "Managed transition of in-house event marketing to external agency structure",
+            "responsibilities": [
+                "Managed $1.2M operations budget",
+                "Implemented consumer engagement promotions focused on music festivals",
+                "Established compliance and safety parameters",
+                "Developed brand impact measurement systems",
+                "Led supplier destruction process for non-compliant materials"
+            ]
+        },
+        {
+            "job_title": "Regional Event Marketing Manager",
+            "company": "Company Name",
+            "duration": "2002-2009",
+            "location": "City, State",
+            "description": "Managed strategic event marketing programs in major sales territory"
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Leadership",
+        "Business Development",
+        "Event Marketing",
+        "Team Management",
+        "Budget Management",
+        "Strategic Planning",
+        "Marketing Strategy",
+        "Project Management",
+        "Compliance Management"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Business Development",
+    "years_of_experience": 20,
+    "seniority_level": "Senior",
+    "keywords": [
+        "business development",
+        "marketing",
+        "event management",
+        "team leadership",
+        "strategic planning"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/BUSINESS-DEVELOPMENT/30938994.pdf"
+}

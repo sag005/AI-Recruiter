@@ -1,0 +1,68 @@
+{
+    "personal_info": {
+        "name": "Marie Fox",
+        "email": "marie.fox@designpro.com",
+        "phone": "(555) 867-5309",
+        "location": "Los Angeles, CA",
+        "linkedin": null
+    },
+    "professional_summary": "Multi-disciplinary designer with a strong marketing and entrepreneurial background. Experienced in leading design projects from start to finish, on time, on budget and with excellent quality. Specializes in graphic design, interior design, and marketing with proven success in project management and creative direction.",
+    "work_experience": [
+        {
+            "job_title": "Freelance Designer",
+            "company": "Self-Employed",
+            "duration": "2012-Current",
+            "location": "Los Angeles, CA",
+            "description": "Launched and operates freelance design business specializing in graphic design, interiors, logos, website makeovers, business name generation and marketing",
+            "responsibilities": [
+                "Spearheaded interior design of two Eco Chateau wellness spas",
+                "Developed design proposals for clients",
+                "Directed multiple creative projects and photoshoots",
+                "Designed ecommerce websites and marketing collateral"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Adobe CS6",
+        "Illustrator",
+        "Photoshop",
+        "AutoCAD",
+        "Studio Designer",
+        "InDesign",
+        "Project Management",
+        "Space Planning",
+        "Marketing & Branding",
+        "Graphic Design",
+        "Interior Design",
+        "Budget Management",
+        "Client Relations",
+        "Traditional Fine Art"
+    ],
+    "certifications": [
+        {
+            "name": "Rising Star Award",
+            "issuer": "National Association of Women Business Owners",
+            "year": "2012",
+            "expiry": null
+        }
+    ],
+    "languages": [
+        "English",
+        "Spanish"
+    ],
+    "category": "Design",
+    "years_of_experience": 10,
+    "seniority_level": "Senior",
+    "keywords": [
+        "graphic design",
+        "interior design",
+        "project management",
+        "marketing",
+        "branding",
+        "space planning",
+        "Adobe Creative Suite",
+        "AutoCAD"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/DESIGNER/28326441.pdf"
+}

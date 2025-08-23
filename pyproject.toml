@@ -10,18 +10,24 @@ authors = [
 ]
 
 dependencies = [
-    "crewai>=0.28.8",
+    "anthropic>=0.64.0",
+    "chromadb>=0.4.22",
+    "crewai>=0.165.1",
     "crewai-tools>=0.62.3",
+    "flask>=3.0.0",
     "google-api-python-client>=2.0.0",
     "google-auth-httplib2>=0.1.0",
     "google-auth-oauthlib>=1.0.0",
     "numpy>=1.24.0",
     "pandas>=2.0.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
     "pypdf2>=3.0.1",
     "python-docx>=0.8.11",
-    "python-dotenv>=1.0.0",
+    "python-dotenv>=1.1.1",
     "sentence-transformers>=2.2.2",
     "supabase>=1.0.0",
+    "voyageai>=0.3.4",
 ]
 
 [project.optional-dependencies]
@@ -38,3 +44,84 @@ dev = [
 Homepage = "https://github.com/yourusername/ai-recruiter"
 Repository = "https://github.com/yourusername/ai-recruiter"
 Issues = "https://github.com/yourusername/ai-recruiter/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_recruiter"]
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = ["test_*"]
+addopts = [
+    "--cov=ai_recruiter",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--strict-markers",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
+
+[tool.coverage.run]
+source = ["ai_recruiter"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

@@ -1,0 +1,81 @@
+{
+    "personal_info": {
+        "name": "Sarah Bloom",
+        "email": "sarah.bloom@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Portland, OR",
+        "linkedin": null
+    },
+    "professional_summary": "Energetic, outgoing and detail-oriented retail floral designer with 13 years of floral sales experience and over 20 years in retail sales. Proven expertise in customer service, floral arrangement design, and retail operations.",
+    "work_experience": [
+        {
+            "job_title": "Floral Designer",
+            "company": "Company Name",
+            "duration": "2014-2015",
+            "location": "City, State",
+            "description": "Seasonal floral designer focusing on holiday arrangements and customer service",
+            "responsibilities": [
+                "Planned arrangements according to client requirements",
+                "Assisted staff during holiday season",
+                "Resolved customer complaints",
+                "Greeted customers and assessed needs",
+                "Attended sales seminars for increasing order values"
+            ]
+        },
+        {
+            "job_title": "Floral Designer",
+            "company": "Company Name",
+            "duration": "2006-2014",
+            "location": "City, State",
+            "description": "Lead floral designer managing daily operations and customer service",
+            "responsibilities": [
+                "Managed store opening procedures",
+                "Processed sales and phone orders through Teleflora Dove system",
+                "Created bouquets, wreaths, and terrariums",
+                "Decorated facilities for events and weddings",
+                "Attended floral symposiums for trend education"
+            ]
+        },
+        {
+            "job_title": "Floral Designer",
+            "company": "Company Name",
+            "duration": "2002-2005",
+            "location": "City, State",
+            "description": "Team floral designer in hospital environment",
+            "responsibilities": [
+                "Worked in six-person design team",
+                "Created floral designs for hospital functions",
+                "Monitored customer preferences",
+                "Managed inventory and merchandising",
+                "Motivated staff for exceptional customer service"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Associates Degree",
+            "field_of_study": "Retail",
+            "institution": "Not Specified",
+            "graduation_year": "1970",
+            "gpa": null,
+            "location": null
+        }
+    ],
+    "skills": [
+        "Floral Design",
+        "Customer Service",
+        "Retail Operations",
+        "Event Decoration",
+        "Inventory Management",
+        "Sales",
+        "Team Leadership",
+        "Teleflora Dove System"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Design",
+    "years_of_experience": 13,
+    "seniority_level": "Senior",
+    "keywords": ["floral design", "retail", "customer service", "event decoration", "sales"],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/DESIGNER/32954522.pdf"
+}

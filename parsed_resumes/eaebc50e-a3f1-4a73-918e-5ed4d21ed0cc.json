@@ -1,0 +1,80 @@
+{
+    "personal_info": {
+        "name": "Marcus Chen",
+        "email": "marcus.chen@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Los Angeles, CA",
+        "linkedin": null
+    },
+    "professional_summary": "Personable CAD Designer/Drafter with extensive experience in land development planning and technical design. Specializes in communicating effectively across all organizational levels and successfully managing projects from planning to completion. Expert in AutoCAD and Civil 3D with strong focus on construction surveying and technical plan execution.",
+    "work_experience": [
+        {
+            "job_title": "Marketing Rep",
+            "company": "Company Name",
+            "duration": "2008-2009",
+            "location": "City, State",
+            "description": "Sales and marketing role in financial services",
+            "responsibilities": [
+                "Interviewed prospective clients for financial needs assessment",
+                "Processed applications and payments",
+                "Conducted weekly lead outreach",
+                "Promoted agency products to customers"
+            ]
+        },
+        {
+            "job_title": "CAD Drafter",
+            "company": "Company Name",
+            "duration": "2008-2008",
+            "location": "City, State",
+            "description": "Technical drafting and design role",
+            "responsibilities": [
+                "Drafted detailed structural drawings",
+                "Reported on design process and cost analysis",
+                "Collaborated with builders on construction alignment"
+            ]
+        },
+        {
+            "job_title": "CAD Designer",
+            "company": "Company Name",
+            "duration": "2007-2008",
+            "location": "City, State",
+            "description": "Senior CAD design position",
+            "responsibilities": [
+                "Prepared engineering computations and designs",
+                "Produced technical specifications",
+                "Implemented complex design software",
+                "Designed transportation and hydraulic systems"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "AutoCAD",
+        "Civil 3D",
+        "Land development planning",
+        "Erosion control",
+        "Technical plan execution",
+        "Water piping design",
+        "Surveying",
+        "Map creation",
+        "Topographic studies",
+        "Construction surveying",
+        "Permit applications",
+        "Project management"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Engineering",
+    "years_of_experience": 7,
+    "seniority_level": "Senior",
+    "keywords": [
+        "CAD",
+        "AutoCAD",
+        "Civil 3D",
+        "Technical Drawing",
+        "Engineering",
+        "Construction",
+        "Surveying"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/DESIGNER/22496394.pdf"
+}

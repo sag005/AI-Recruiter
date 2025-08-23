@@ -1,0 +1,55 @@
+{
+    "personal_info": {
+        "name": "Sarah Anderson",
+        "email": "s.anderson@example.com",
+        "phone": "(555) 987-6543",
+        "location": "Houston, TX",
+        "linkedin": null
+    },
+    "professional_summary": "Self-starter, customer-focused business development professional with extensive experience in HR, recruiting, and staffing industry. Proven track record of exceeding corporate objectives and quotas with strong communication and relationship-building skills. Specializes in business implementation, recruiting, and customer relations.",
+    "work_experience": [
+        {
+            "job_title": "Business Development Consultant",
+            "company": "Company Name",
+            "duration": "2015-Current",
+            "location": "Houston, TX",
+            "description": "Human Resources, Recruiting, and Business Development professional focusing on client services and relationship management",
+            "responsibilities": [
+                "Provide Human Resources, Recruiting, Screening, and staffing services to employers in assigned areas",
+                "Maintain and build relationships with new and existing clients",
+                "Network through industry contacts and association memberships",
+                "Analyze data to identify business development opportunities",
+                "Develop and process client contracts"
+            ]
+        }
+    ],
+    "education": [],
+    "skills": [
+        "Microsoft Office Programs",
+        "SharePoint",
+        "PeopleSoft",
+        "ADP Payroll",
+        "Internet Applications",
+        "Business Development",
+        "Recruiting",
+        "Human Resources",
+        "Sales & Marketing",
+        "Project Coordination",
+        "Customer Relations"
+    ],
+    "certifications": [],
+    "languages": ["English"],
+    "category": "Business Development",
+    "years_of_experience": 8,
+    "seniority_level": "Senior",
+    "keywords": [
+        "business development",
+        "human resources",
+        "recruiting",
+        "sales",
+        "customer relations",
+        "staffing",
+        "project coordination"
+    ],
+    "pdf_path": "/Users/ada/fun/AI-Recruiter/data/BUSINESS-DEVELOPMENT/34046031.pdf"
+}
