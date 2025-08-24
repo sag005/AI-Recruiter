@@ -41,6 +41,41 @@
             <p id="loadingText">Analyzing job requirements...</p>
         </div>
 
+        <div id="searchProgress" class="search-progress" style="display: none;">
+            <div class="progress-header">
+                <div class="progress-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="progress-text">
+                    <h3>Finding Best Candidates</h3>
+                    <p id="progressDescription">Our AI agents are working to find the perfect matches for your role<span class="dots-animation"></span></p>
+                </div>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div id="progressBarFill" class="progress-bar-fill" style="width: 0%"></div>
+            </div>
+            
+            <div class="progress-steps">
+                <div class="progress-step" id="step-analyzing">
+                    <div class="step-icon">1</div>
+                    <div class="step-text">Analyzing job requirements and extracting key criteria</div>
+                </div>
+                <div class="progress-step" id="step-searching">
+                    <div class="step-icon">2</div>
+                    <div class="step-text">Searching resume database using semantic matching</div>
+                </div>
+                <div class="progress-step" id="step-ranking">
+                    <div class="step-icon">3</div>
+                    <div class="step-text">Ranking candidates and analyzing fit scores</div>
+                </div>
+                <div class="progress-step" id="step-finalizing">
+                    <div class="step-icon">4</div>
+                    <div class="step-text">Finalizing results and generating detailed insights</div>
+                </div>
+            </div>
+        </div>
+
         <div id="searchResults" class="search-results" style="display: none;">
             <h2>Top Matches</h2>
             <div id="resultsContainer"></div>
@@ -177,10 +212,10 @@ function searchCandidates() {
     // Hide previous results and errors
     hideMessages();
     document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('loadingIndicator').style.display = 'none';
     
-    // Show loading
-    document.getElementById('loadingIndicator').style.display = 'block';
-    document.getElementById('loadingText').textContent = 'Analyzing job requirements...';
+    // Show progress bar
+    showSearchProgress();
 
     // Start search
     fetch('/api/search', {
@@ -197,7 +232,7 @@ function searchCandidates() {
     .then(data => {
         if (data.error) {
             showError(data.error);
-            document.getElementById('loadingIndicator').style.display = 'none';
+            hideSearchProgress();
         } else {
             currentSearchId = data.search_id;
             startSearchPolling();
@@ -205,7 +240,7 @@ function searchCandidates() {
     })
     .catch(error => {
         showError('Search failed: ' + error.message);
-        document.getElementById('loadingIndicator').style.display = 'none';
+        hideSearchProgress();
     });
 }
 
@@ -214,6 +249,9 @@ function startSearchPolling() {
     checkSearchStatus(); // Check immediately
 }
 
+let progressStep = 0;
+let progressTimer = null;
+
 function checkSearchStatus() {
     if (!currentSearchId) return;
 
@@ -221,22 +259,116 @@ function checkSearchStatus() {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'searching') {
-                document.getElementById('loadingText').textContent = data.progress || 'Searching candidates...';
+                updateProgressDescription(data.progress || 'Searching candidates...');
             } else if (data.status === 'completed') {
                 clearInterval(searchCheckInterval);
-                document.getElementById('loadingIndicator').style.display = 'none';
-                displayResults(data.results);
+                completeProgress();
+                setTimeout(() => {
+                    hideSearchProgress();
+                    displayResults(data.results);
+                }, 1000);
             } else if (data.status === 'error') {
                 clearInterval(searchCheckInterval);
-                document.getElementById('loadingIndicator').style.display = 'none';
+                hideSearchProgress();
                 showError(data.error || 'Search failed');
             }
         })
         .catch(error => {
             clearInterval(searchCheckInterval);
-            document.getElementById('loadingIndicator').style.display = 'none';
+            hideSearchProgress();
             showError('Status check failed');
         });
+}
+
+function showSearchProgress() {
+    document.getElementById('searchProgress').style.display = 'block';
+    progressStep = 0;
+    
+    // Reset all steps
+    document.querySelectorAll('.progress-step').forEach(step => {
+        step.classList.remove('active', 'completed');
+    });
+    
+    // Start step progression
+    progressStep = 1;
+    updateProgressStep();
+    
+    // Auto-progress through steps
+    progressTimer = setInterval(() => {
+        if (progressStep < 4) {
+            progressStep++;
+            updateProgressStep();
+        }
+    }, 3000); // Progress every 3 seconds
+}
+
+function hideSearchProgress() {
+    document.getElementById('searchProgress').style.display = 'none';
+    if (progressTimer) {
+        clearInterval(progressTimer);
+        progressTimer = null;
+    }
+}
+
+function updateProgressStep() {
+    const steps = ['analyzing', 'searching', 'ranking', 'finalizing'];
+    const progressPercentages = [25, 50, 75, 90];
+    
+    // Update progress bar
+    document.getElementById('progressBarFill').style.width = progressPercentages[progressStep - 1] + '%';
+    
+    // Update step states
+    steps.forEach((stepName, index) => {
+        const stepElement = document.getElementById(`step-${stepName}`);
+        if (index + 1 < progressStep) {
+            stepElement.classList.remove('active');
+            stepElement.classList.add('completed');
+            stepElement.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+        } else if (index + 1 === progressStep) {
+            stepElement.classList.remove('completed');
+            stepElement.classList.add('active');
+            stepElement.querySelector('.step-icon').innerHTML = index + 1;
+        } else {
+            stepElement.classList.remove('active', 'completed');
+            stepElement.querySelector('.step-icon').innerHTML = index + 1;
+        }
+    });
+    
+    // Update descriptions based on step
+    const descriptions = [
+        'Analyzing job requirements and extracting key skills',
+        'Searching through resume database using AI matching',
+        'Ranking candidates based on relevance and fit',
+        'Finalizing results and preparing insights'
+    ];
+    
+    if (progressStep <= descriptions.length) {
+        updateProgressDescription(descriptions[progressStep - 1]);
+    }
+}
+
+function completeProgress() {
+    if (progressTimer) {
+        clearInterval(progressTimer);
+        progressTimer = null;
+    }
+    
+    // Complete all steps
+    document.querySelectorAll('.progress-step').forEach(step => {
+        step.classList.remove('active');
+        step.classList.add('completed');
+        step.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+    });
+    
+    // Set progress bar to 100%
+    document.getElementById('progressBarFill').style.width = '100%';
+    updateProgressDescription('Search completed! Loading results...');
+}
+
+function updateProgressDescription(text) {
+    const descElement = document.getElementById('progressDescription');
+    // Remove dots animation temporarily
+    descElement.innerHTML = text + '<span class="dots-animation"></span>';
 }
 
 function displayResults(results) {
