@@ -16,6 +16,8 @@ import voyageai
 from crewai import Agent, Task, Crew, LLM
 from crewai.tools import tool
 
+from .scheduler_agent import get_available_slots_direct
+
 
 class Settings(BaseSettings):
     """Application settings from environment variables."""
@@ -46,6 +48,15 @@ class CandidateRanking(BaseModel):
     summary: str
 
 
+class EmailDraft(BaseModel):
+    """Email draft for a candidate."""
+    candidate_id: str
+    candidate_name: str
+    subject_line: str
+    email_body: str
+    time_slots: List[str] = Field(default_factory=list)
+
+
 class CandidateMatcherAgent:
     def __init__(self, settings: Settings = None):
         self.settings = settings or Settings()
@@ -69,8 +80,9 @@ class CandidateMatcherAgent:
         else:
             raise Exception("Voyage API key required for consistent embeddings")
         
-        # Create the RAG search tool
+        # Create the RAG search tool and scheduling tool
         self.search_tool = self._create_search_tool()
+        self.schedule_tool = self._create_schedule_tool()
         
         # Create CrewAI agents
         self.job_analyzer = Agent(
@@ -90,6 +102,16 @@ class CandidateMatcherAgent:
             allow_delegation=False,
             llm=self.llm,
             tools=[self.search_tool]
+        )
+        
+        self.email_writer = Agent(
+            role="Personalized Email Writer",
+            goal="Create compelling, personalized emails that highlight candidate strengths and job benefits with scheduling options",
+            backstory="You are an expert recruiter who excels at writing personalized, engaging emails that make candidates excited about opportunities. You understand how to highlight why someone is a perfect match while explaining what makes a role attractive to them specifically.",
+            verbose=True,
+            allow_delegation=False,
+            llm=self.llm,
+            tools=[self.schedule_tool]
         )
     
     def _create_search_tool(self):
@@ -152,6 +174,116 @@ class CandidateMatcherAgent:
                 return f"Error searching candidates: {str(e)}"
         
         return search_candidates
+    
+    def _create_schedule_tool(self):
+        """Create a tool to get available time slots."""
+        
+        @tool("Get Available Time Slots")
+        def get_time_slots() -> str:
+            """
+            Get 3 available 30-minute time slots for candidate interviews (weekdays only).
+            
+            Returns:
+                String containing 3 available time slots during business hours
+            """
+            try:
+                slots_result = get_available_slots_direct()
+                return slots_result
+            except Exception as e:
+                return f"Error getting time slots: {str(e)}"
+        
+        return get_time_slots
+    
+    def create_email_draft(self, candidate: CandidateMatch, job_description: str, job_title: str, company_name: str = "Our Company") -> EmailDraft:
+        """
+        Create a personalized email draft for a specific candidate.
+        
+        Args:
+            candidate: CandidateMatch object with candidate details
+            job_description: The full job description
+            job_title: The job title
+            company_name: Company name (default: "Our Company")
+            
+        Returns:
+            EmailDraft object with personalized email content and time slots
+        """
+        
+        # Task to create personalized email
+        email_task = Task(
+            description=f"""
+            Create a personalized email draft for the following candidate:
+            
+            Candidate Name: {candidate.name}
+            Match Score: {candidate.match_score}
+            Key Strengths: {', '.join(candidate.key_strengths)}
+            Relevant Experience: {', '.join(candidate.relevant_experience)}
+            Rationale: {candidate.rationale}
+            
+            Job Details:
+            Company: {company_name}
+            Position: {job_title}
+            Job Description: {job_description}
+            
+            Instructions:
+            1. First, use the "Get Available Time Slots" tool to retrieve 3 available interview times
+            2. Write a compelling subject line (max 60 characters)
+            3. Create an email body that includes:
+               a) Personal greeting using their name
+               b) Write in FIRST PERSON from the perspective of "Sarah Chen, Senior Recruiter"
+               c) Specific mention of why they're a strong match (reference their key strengths and experience)
+               d) Explanation of why this role would be beneficial for their career (growth opportunities, learning, impact)
+               e) Brief overview of what makes the company/role attractive
+               f) Request to schedule an interview with the 3 time slot options
+               g) Professional but warm closing signed "Best regards, Sarah Chen"
+            
+            Tone: Professional yet personalized, enthusiastic but not overly salesy, respectful of their time, written as if from a real recruiter
+            Length: Keep email concise (200-300 words max)
+            Voice: First person ("I noticed", "I believe", "I'd love to discuss") from Sarah Chen's perspective
+            
+            Return the result as a JSON object with this exact structure:
+            {{
+                "candidate_id": "{candidate.candidate_id}",
+                "candidate_name": "{candidate.name}",
+                "subject_line": "<compelling subject line>",
+                "email_body": "<complete email body with time slots included>",
+                "time_slots": ["slot1", "slot2", "slot3"]
+            }}
+            """,
+            agent=self.email_writer,
+            expected_output="JSON object with personalized email draft and time slots"
+        )
+        
+        # Create and run the crew
+        crew = Crew(
+            agents=[self.email_writer],
+            tasks=[email_task],
+            verbose=True
+        )
+        
+        # Execute the crew
+        result = crew.kickoff()
+        
+        # Parse the result
+        try:
+            result_str = str(result)
+            # Extract JSON from the result
+            if "{" in result_str:
+                json_start = result_str.find("{")
+                json_end = result_str.rfind("}") + 1
+                json_str = result_str[json_start:json_end]
+                result_data = json.loads(json_str)
+                return EmailDraft(**result_data)
+            else:
+                raise ValueError("No JSON found in result")
+        except Exception as e:
+            # Fallback: create basic email
+            return EmailDraft(
+                candidate_id=candidate.candidate_id,
+                candidate_name=candidate.name,
+                subject_line=f"Exciting {job_title} Opportunity at {company_name}",
+                email_body=f"Dear {candidate.name},\n\nI hope this email finds you well. I came across your profile and was impressed by your background, particularly your {', '.join(candidate.key_strengths[:2])}.\n\nI believe you'd be a great fit for our {job_title} position at {company_name}. This role offers excellent opportunities for growth and would leverage your existing expertise while expanding your skill set.\n\nI'd love to discuss this opportunity with you. Are you available for a brief conversation?\n\nBest regards,\nSarah Chen\nSenior Recruiter",
+                time_slots=["Monday: 9:00 AM - 9:30 AM", "Tuesday: 2:00 PM - 2:30 PM", "Wednesday: 4:00 PM - 4:30 PM"]
+            )
     
     def find_best_candidates(self, job_description: str, job_title: str = "") -> CandidateRanking:
         """
