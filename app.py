@@ -302,5 +302,111 @@ def extract_requirements():
     
     return jsonify({'requirements': requirements[:6]})  # Return top 6 requirements
 
+@app.route('/api/draft_email', methods=['POST'])
+def draft_email():
+    """Create email draft for a specific candidate"""
+    data = request.get_json()
+    
+    if not data or not all(k in data for k in ['candidate_id', 'job_description', 'job_title']):
+        return jsonify({'error': 'candidate_id, job_description, and job_title required'}), 400
+    
+    candidate_id = data['candidate_id']
+    job_description = data['job_description']
+    job_title = data['job_title']
+    company_name = data.get('company_name', 'Our Company')
+    
+    # Get the search results to find the candidate
+    search_id = None
+    candidate_data = None
+    
+    # Find the candidate from recent search results
+    for sid, result in search_results.items():
+        if result['status'] == 'completed' and result['results']:
+            for candidate in result['results']['candidates']:
+                if candidate['id'] == candidate_id:
+                    candidate_data = candidate
+                    search_id = sid
+                    break
+            if candidate_data:
+                break
+    
+    if not candidate_data:
+        return jsonify({'error': 'Candidate not found in recent searches'}), 404
+    
+    # Generate draft ID
+    draft_id = str(uuid.uuid4())
+    
+    # Start email drafting in background
+    thread = threading.Thread(target=draft_email_background, args=(draft_id, candidate_data, job_description, job_title, company_name))
+    thread.daemon = True
+    thread.start()
+    
+    return jsonify({
+        'draft_id': draft_id,
+        'message': 'Email drafting started'
+    }), 200
+
+# Store email draft results (in production, use Redis or database)
+email_drafts = {}
+
+def draft_email_background(draft_id, candidate_data, job_description, job_title, company_name):
+    """Draft email in background using CrewAI agent"""
+    try:
+        # Initialize draft status
+        email_drafts[draft_id] = {
+            'status': 'drafting',
+            'progress': 'Creating personalized email...',
+            'draft': None,
+            'error': None
+        }
+        
+        # Create a CandidateMatch object from the candidate data
+        from agents.candidate_matcher import CandidateMatch
+        
+        candidate_match = CandidateMatch(
+            candidate_id=candidate_data['id'],
+            name=candidate_data['name'],
+            match_score=candidate_data['match_score'] / 100.0,  # Convert back to 0-1 scale
+            rationale=candidate_data['rationale'],
+            key_strengths=candidate_data['strengths'],
+            potential_concerns=candidate_data['concerns'],
+            relevant_experience=candidate_data['experience']
+        )
+        
+        # Use the candidate matcher agent to create email draft
+        draft = matcher_agent.create_email_draft(candidate_match, job_description, job_title, company_name)
+        
+        # Format draft for frontend
+        formatted_draft = {
+            'candidate_id': draft.candidate_id,
+            'candidate_name': draft.candidate_name,
+            'subject_line': draft.subject_line,
+            'email_body': draft.email_body,
+            'time_slots': draft.time_slots
+        }
+        
+        email_drafts[draft_id] = {
+            'status': 'completed',
+            'progress': 'Email draft completed',
+            'draft': formatted_draft,
+            'error': None
+        }
+        
+    except Exception as e:
+        email_drafts[draft_id] = {
+            'status': 'error',
+            'progress': 'Email drafting failed',
+            'draft': None,
+            'error': str(e)
+        }
+
+@app.route('/api/draft/<draft_id>')
+def get_email_draft(draft_id):
+    """Get email draft results"""
+    if draft_id not in email_drafts:
+        return jsonify({'error': 'Draft ID not found'}), 404
+    
+    return jsonify(email_drafts[draft_id])
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

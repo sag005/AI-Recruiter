@@ -46,6 +46,65 @@
             <div id="resultsContainer"></div>
         </div>
 
+        <!-- Email Draft Side Pane -->
+        <div id="emailSidePane" class="email-side-pane" style="display: none;">
+            <div class="pane-header">
+                <h3><i class="fas fa-envelope"></i> Email Draft</h3>
+                <button class="close-btn" onclick="closeEmailPane()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="pane-content">
+                <div id="emailLoadingIndicator" class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p id="emailLoadingText">Creating personalized email...</p>
+                </div>
+                
+                <div id="emailDraftContent" style="display: none;">
+                    <div class="email-preview">
+                        <div class="form-group">
+                            <label for="emailSubject"><strong>Subject:</strong></label>
+                            <input type="text" id="emailSubject" class="form-control" placeholder="Email subject line...">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="emailBody"><strong>Message:</strong></label>
+                            <textarea id="emailBody" class="form-control" rows="12" placeholder="Email message body..."></textarea>
+                        </div>
+                        
+                        <div class="time-slots-section">
+                            <h4><i class="fas fa-calendar"></i> Available Time Slots:</h4>
+                            <div id="timeSlotsList" class="time-slots-list"></div>
+                        </div>
+                        
+                        <div class="edit-actions">
+                            <div class="edit-info">
+                                <i class="fas fa-info-circle"></i>
+                                <span>You can edit the subject and message above</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pane-actions">
+                            <button class="btn btn-primary" onclick="copyEmailDraft()">
+                                <i class="fas fa-copy"></i> Copy Draft
+                            </button>
+                            <button class="btn btn-secondary" onclick="sendEmail()">
+                                <i class="fas fa-paper-plane"></i> Send Email
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="emailErrorMessage" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="emailErrorText"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Backdrop for side pane -->
+        <div id="emailPaneBackdrop" class="pane-backdrop" style="display: none;" onclick="closeEmailPane()"></div>
+
         <div id="errorMessage" class="error-message" style="display: none;">
             <i class="fas fa-exclamation-triangle"></i>
             <span id="errorText"></span>
@@ -256,7 +315,7 @@ function displayResults(results) {
                 <button class="btn btn-sm btn-secondary">
                     <i class="fas fa-download"></i> Download Resume
                 </button>
-                <button class="btn btn-sm btn-secondary">
+                <button class="btn btn-sm btn-secondary" onclick="scheduleInterview('${candidate.id}')">
                     <i class="fas fa-envelope"></i> Schedule Interview
                 </button>
             </div>
@@ -302,10 +361,183 @@ Responsibilities:
 - Maintain brand consistency across all visual communications`;
 }
 
+// Variables for email drafting
+let currentDraftId = null;
+let draftCheckInterval = null;
+
+// Schedule interview function
+function scheduleInterview(candidateId) {
+    const jobTitle = document.getElementById('jobTitle').value;
+    const jobDescription = document.getElementById('jobDescription').value;
+    
+    if (!jobDescription.trim()) {
+        showError('Job description is required to draft email');
+        return;
+    }
+    
+    // Show the side pane and start drafting
+    showEmailPane();
+    startEmailDrafting(candidateId, jobDescription, jobTitle || 'Position');
+}
+
+function showEmailPane() {
+    document.getElementById('emailSidePane').style.display = 'block';
+    document.getElementById('emailPaneBackdrop').style.display = 'block';
+    document.body.classList.add('side-pane-open');
+}
+
+function closeEmailPane() {
+    document.getElementById('emailSidePane').style.display = 'none';
+    document.getElementById('emailPaneBackdrop').style.display = 'none';
+    document.body.classList.remove('side-pane-open');
+    
+    // Clear any ongoing polling
+    if (draftCheckInterval) {
+        clearInterval(draftCheckInterval);
+        draftCheckInterval = null;
+    }
+    
+    // Hide all pane content
+    document.getElementById('emailLoadingIndicator').style.display = 'none';
+    document.getElementById('emailDraftContent').style.display = 'none';
+    document.getElementById('emailErrorMessage').style.display = 'none';
+}
+
+function startEmailDrafting(candidateId, jobDescription, jobTitle) {
+    // Show loading
+    document.getElementById('emailLoadingIndicator').style.display = 'block';
+    document.getElementById('emailLoadingText').textContent = 'Creating personalized email...';
+    
+    // Start email drafting
+    fetch('/api/draft_email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            candidate_id: candidateId,
+            job_description: jobDescription,
+            job_title: jobTitle,
+            company_name: 'TechCorp'  // Could be made configurable
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            showEmailError(data.error);
+            document.getElementById('emailLoadingIndicator').style.display = 'none';
+        } else {
+            currentDraftId = data.draft_id;
+            startDraftPolling();
+        }
+    })
+    .catch(error => {
+        showEmailError('Email drafting failed: ' + error.message);
+        document.getElementById('emailLoadingIndicator').style.display = 'none';
+    });
+}
+
+function startDraftPolling() {
+    draftCheckInterval = setInterval(checkDraftStatus, 2000);
+    checkDraftStatus(); // Check immediately
+}
+
+function checkDraftStatus() {
+    if (!currentDraftId) return;
+
+    fetch(`/api/draft/${currentDraftId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'drafting') {
+                document.getElementById('emailLoadingText').textContent = data.progress || 'Creating email draft...';
+            } else if (data.status === 'completed') {
+                clearInterval(draftCheckInterval);
+                document.getElementById('emailLoadingIndicator').style.display = 'none';
+                displayEmailDraft(data.draft);
+            } else if (data.status === 'error') {
+                clearInterval(draftCheckInterval);
+                document.getElementById('emailLoadingIndicator').style.display = 'none';
+                showEmailError(data.error || 'Email drafting failed');
+            }
+        })
+        .catch(error => {
+            clearInterval(draftCheckInterval);
+            document.getElementById('emailLoadingIndicator').style.display = 'none';
+            showEmailError('Status check failed');
+        });
+}
+
+function displayEmailDraft(draft) {
+    if (!draft) {
+        showEmailError('No draft data received');
+        return;
+    }
+    
+    // Populate the email preview
+    document.getElementById('emailSubject').value = draft.subject_line || '';
+    document.getElementById('emailBody').value = draft.email_body || '';
+    
+    // Display time slots
+    const timeSlotsList = document.getElementById('timeSlotsList');
+    timeSlotsList.innerHTML = '';
+    
+    if (draft.time_slots && draft.time_slots.length > 0) {
+        draft.time_slots.forEach((slot, index) => {
+            const slotDiv = document.createElement('div');
+            slotDiv.className = 'time-slot-item';
+            slotDiv.innerHTML = `
+                <i class="fas fa-clock"></i>
+                <span>${slot}</span>
+            `;
+            timeSlotsList.appendChild(slotDiv);
+        });
+    } else {
+        timeSlotsList.innerHTML = '<p>No available time slots found</p>';
+    }
+    
+    // Show the email content
+    document.getElementById('emailDraftContent').style.display = 'block';
+}
+
+function showEmailError(message) {
+    hideEmailMessages();
+    const errorDiv = document.getElementById('emailErrorMessage');
+    document.getElementById('emailErrorText').textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function hideEmailMessages() {
+    document.getElementById('emailErrorMessage').style.display = 'none';
+}
+
+function copyEmailDraft() {
+    const subject = document.getElementById('emailSubject').value;
+    const body = document.getElementById('emailBody').value;
+    
+    const fullEmail = `Subject: ${subject}\n\n${body}`;
+    
+    navigator.clipboard.writeText(fullEmail).then(() => {
+        showToast('Email draft copied to clipboard!', 'success');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        showToast('Failed to copy email draft', 'error');
+    });
+}
+
+function sendEmail() {
+    // This would integrate with an email service
+    showToast('Email sending feature coming soon!', 'info');
+}
+
 // Add keyboard shortcut for sample job
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.shiftKey && e.key === 'S') {
         loadSampleJob();
+    }
+    
+    // ESC key to close email pane
+    if (e.key === 'Escape') {
+        closeEmailPane();
     }
 });
 </script>
